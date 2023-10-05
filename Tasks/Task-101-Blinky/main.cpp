@@ -26,6 +26,6 @@ int main()
         greenLED = 0;
 
         // Wait 0.2 second
-        wait_us(1000000); 
+        wait_us(100000); 
     }
 }
