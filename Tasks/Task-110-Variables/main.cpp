@@ -21,7 +21,7 @@ BusOut ledData(LED_D0_PIN, LED_D1_PIN, LED_D2_PIN, LED_D3_PIN, LED_D4_PIN, LED_D
 
 int main()
 {
-    printf("\nTASK-110\n");
+    printf("\nTASK-110\n\n");
 
     // Integer
     int count = 0;
