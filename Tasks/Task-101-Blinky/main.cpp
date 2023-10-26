@@ -12,7 +12,7 @@ DigitalOut redLED(LED3);
 int main() 
 {
     // ALL the repeating code is contained in a  “while loop”
-    while(true) 
+    while(1<2) 
     { 
         //The code between the { curly braces } is the code that is repeated forever
 
@@ -26,6 +26,6 @@ int main()
         greenLED = 0;
 
         // Wait 0.2 second
-        wait_us(1000000); 
+        
     }
 }
