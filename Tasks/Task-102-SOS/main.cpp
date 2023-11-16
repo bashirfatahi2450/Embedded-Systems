@@ -2,7 +2,7 @@
 #include "uop_msb.h"
 using namespace uop_msb;
 
-#define WAIT_TIME_MS 500 
+#define WAIT_TIME_MS 2000 
 DigitalOut greenLED(TRAF_GRN1_PIN);
 Buzzer buzz;
 Buttons buttons;

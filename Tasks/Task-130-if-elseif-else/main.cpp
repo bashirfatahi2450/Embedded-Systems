@@ -15,7 +15,7 @@ LatchedLED disp(LatchedLED::SEVEN_SEG);
 
 int main()
 {
-    int count = 0;
+    int count = 100;
 
     //Turn ON the 7-segment display
     disp.enable(true);
@@ -27,14 +27,19 @@ int main()
         
         //Read button without blocking
         int btnA = ButtonA;     //Local to the while-loop  
-
-        //Test Button A
+        int btnB = ButtonB;     //Local to the while-loop
+        //Test Button A,
         if (btnA == 1) {
-            redLED = !redLED;    //Toggle RED led
-            count = count + 1;            //Increment count
+            greenLED = !greenLED;    //Toggle RED led
+            count = count -  ( (count>0) ? 1 : 0 );         //Increment count
             disp = count;       //Update display
         }
-
+        else if (btnB == 1) {
+            greenLED = !greenLED;    //Toggle RED led
+            count = count - 1;            //Increment count
+            disp = count;       //Update display
+        }
+       
         // Slow it down a bit (and debounce the switches)
         wait_us(100000);  
     }

@@ -68,14 +68,21 @@ int main()
 
         // Did button B change?
         if (btnB_curr != btnB_prev) {
-
-            //Was it a press?
-            if (btnB_curr == 1) {
-                //Button B was pressed!
-                if (count > 0) {
+        //Button B was pressed!
+                if (count < 99) {
                     count-=1;
                 }
-            }
+
+        }
+           //Did button A and B change?
+        if (btnA_curr != btnA_prev) && (btnB_curr != btnB_prev) {
+        //Button A and B was pressed!
+        if (btnA_curr == 1) && (btnB_curr == 1) {
+                if (count < 99) {
+                    count = 0;
+                }
+
+        }
             
             // The previous value is now set to the current
             btnB_prev = btnB_curr;

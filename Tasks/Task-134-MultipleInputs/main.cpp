@@ -47,7 +47,7 @@ int main()
         } 
 
         if (count > 0 ) {
-            count -= 1;
+            count = 1;
         }
 
         //Wait for button B
@@ -55,7 +55,7 @@ int main()
         }
 
         if (count < 99 ) {
-            count += 1;
+            count = 11;
         } 
 
         //Reset condition

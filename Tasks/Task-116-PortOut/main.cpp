@@ -9,11 +9,11 @@ int main()
 
     while (true)
     {
-        lights = 0b0000000000000100;
+        lights = 0b0000000000001100;
         wait_us(1000000);
-        lights = 0b0000000000001000;
+        lights = 0b0000000001001000;
         wait_us(1000000);
-        lights = 0b0000000001000000;
+        lights = 0b0000000001000100;
         wait_us(1000000);                
     }
 }
