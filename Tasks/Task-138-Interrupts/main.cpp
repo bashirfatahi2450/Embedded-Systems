@@ -7,7 +7,7 @@ using namespace chrono;
 //Count variable
 int counter=0;
 
-InterruptIn btnb(BTN1_PIN);
+InterruptIn btnA(BTN1_PIN);
 InterruptIn btnB(BTN2_PIN);
 Ticker tick;
 
@@ -39,7 +39,7 @@ int main()
     //Set up interrupts
     btnA.rise(&funcA);
     btnB.fall(&funcB);
-    tick.attach(&funcTmr, 500ms);
+    tick.attach(&funcTmr, 4s);
     
     //Main loop - mostly sleeps :)
     while (true) {
