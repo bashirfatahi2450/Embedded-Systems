@@ -7,7 +7,7 @@ using namespace chrono;
 //Count variable
 int counter=0;
 
-InterruptIn btnA(BTN1_PIN);
+InterruptIn btnb(BTN1_PIN);
 InterruptIn btnB(BTN2_PIN);
 Ticker tick;
 
