@@ -46,8 +46,10 @@ int main()
         //Read Analog to Digital Converter values (16 bit)
         unsigned short potVal   = pot.read_u16();
         unsigned short lightVal = ldr.read_u16();
-        unsigned short micVal   = mic.read_u16(); 
-
+        short micVal   = mic.read_u16(); 
+         
+        
+         
         //Write to terminal
         printf("--------------------------------\n");
         printf("Potentiometer: %X\n", potVal);
