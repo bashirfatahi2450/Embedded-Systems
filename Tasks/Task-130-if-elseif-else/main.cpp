@@ -31,13 +31,17 @@ int main()
         //Test Button A,
         if (btnA == 1) {
             greenLED = !greenLED;    //Toggle RED led
-            count = count -  ( (count>0) ? 1 : 0 );         //Increment count
+            count ++;         //Increment count
             disp = count;       //Update display
         }
-        else if (btnB == 1) {
+        if (btnB == 1) {
             greenLED = !greenLED;    //Toggle RED led
-            count = count - 1;            //Increment count
+             count --;             //Increment count
             disp = count;       //Update display
+        }
+        if ((btnA == 1) && (btnB == 1)) {
+            count = 0;
+            greenLED = 1;
         }
        
         // Slow it down a bit (and debounce the switches)
