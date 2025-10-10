@@ -37,19 +37,19 @@ int main()
     printf("The character %c has the ASCII code %d\n", character, character);
 
     // Short
-    short shortCount = 32766;
+    short  shortCount = 32766;
     printf("The value of shortCount is %hd\n", shortCount);
-    shortCount = shortCount + 1;
+    shortCount = shortCount + 2;
     printf("add 1 and shortCount is %hd\n", shortCount);
 
     // Long long
     long long NN = 0x12345678ABCD0001LL; //Literal in HEX
-    printf("A very large number %lld\n", NN);
+    printf("A very large number %11d\n", NN);
     printf("A very large number in hex %llX\n", NN);
 
     // unsigned
-    unsigned short p = 1; //16 bit
-    printf("unsigned int p = %u\n", p);
+    short p = 1; //16 bit
+    printf("unsigned int p = %d\n", p);
     p = p - 2;
     printf("Subtract 2. Now unsigned int p = %u\n", p);
 
