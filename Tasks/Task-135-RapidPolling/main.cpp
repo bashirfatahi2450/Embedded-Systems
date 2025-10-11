@@ -31,62 +31,48 @@ int main()
     //Turn ON the 7-segment display
     disp.enable(true);
 
-    int btnA_prev = buttonA;
-    int btnB_prev = buttonB;
+   
     int btnA_curr;
     int btnB_curr;
     
-    while (true) {
+    // Latches for one-shot per press
+uint8_t btnA_prev = 0;
+uint8_t btnB_prev = 0;
+uint8_t both_prev = 0;
 
-        // ************************************
-        // Read all inputs and store the result
-        // ************************************
-        btnA_curr = buttonA;
-        btnB_curr = buttonB;
+while (true) {
+    // Assume these booleans are updated each loop: 1 = pressed, 0 = not pressed
+    uint8_t a = buttonA;
+    uint8_t b = buttonB;
 
-        // ****************************
-        // UPDATE IF THERE WAS A CHANGE
-        // ****************************
+    // --- Update display first (as in your code)
+    disp = count;
 
-        // Did button A change?
-        if (btnA_curr != btnA_prev) {
-
-            //Was it a press?
-            if (btnA_curr == 1) {
-                //Button A was pressed!
-                if (count < 99) {
-                    count+=1;
-                }
-            }
-
-            // The previous value is now set to the current
-            btnA_prev = btnA_curr;
-
-            //Update display
-            disp = count;            
+    // --- Handle BOTH pressed first (edge so it triggers once)
+    uint8_t both = a & b;
+    if (both && !both_prev) {
+        count = 0;                   // your reset action
+    } else {
+        // --- Handle A press (edge: now 1, previously 0)
+        if (a && !btnA_prev) {
+            if (count <99) { count += 1 ; }   // your A action
         }
 
-        // Did button B change?
-        if (btnB_curr != btnB_prev) {
-
-            //Was it a press?
-            if (btnB_curr == 1) {
-                //Button B was pressed!
-                if (count > 0) {
-                    count-=1;
-                }
-            }
-            
-            // The previous value is now set to the current
-            btnB_prev = btnB_curr;
-
-            //Update display
-            disp = count;               
+        // --- Handle B press (edge)
+        if (b && !btnB_prev) {
+            if (count > 0) { count -= 1; } // your B action
         }
-        
-        // Slow it down a bit (and debounce the switches)
-        wait_us(250000);  
     }
+
+    // The previous values are now set to the current
+    btnA_prev = a;
+    btnB_prev = b;
+    both_prev = both;
+
+    // Small pacing (and mild debounce). Keep it short so you don’t miss presses.
+    wait_us(2000);  // ~2 ms; bump to 10–20 ms if you see bounce
+}
+
 }
 
 

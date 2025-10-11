@@ -30,34 +30,42 @@ int main()
         int btn = buttons;     //Local to the while-loop  
 
         switch (btn) {
-            case 0:
-            //Nothing pressed
-            greenLED = 0;
-            yellowLED = 0;
-            redLED = !redLED;
-            break;
+            
 
             case 1:
             //Button A only
-            redLED = 0;
+            redLED = !redLED;
             yellowLED = 0;            
-            greenLED = !greenLED;
+            greenLED = 0;
             break;
 
-            case 3: 
-            //Button A and B
+            case 2:
+            //Button B only
             redLED = 0;
             yellowLED = !yellowLED;            
             greenLED = 0;
             break;
 
-            default:
-            //All others
-            greenLED = 0;
-            yellowLED = 0;
+            case 4: 
+            //Button C only
             redLED = 0;
+            yellowLED = 0;            
+            greenLED = !greenLED;
             break;
 
+            case 8:
+            //Buttin D only
+            greenLED = !greenLED;
+            yellowLED = !yellowLED;
+            redLED = !redLED;
+            break;
+
+            default:
+            //all other combination
+            greenLED = 1;
+            yellowLED = 1;
+            redLED = 1;
+            break;
         }
 
         // Slow it down a bit (and debounce the switches)
