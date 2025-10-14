@@ -14,8 +14,8 @@ PortOut LEDs(PortB, LedMASK);
 int main()
 {
     while (true) {
-        leds = 1;   //Binary 000
-        LEDs = 1,
+        leds = 0;   //Binary 000
+        LEDs = 0;
         wait_us(500000);
         leds = 0xFF;   //Binary 11111111
         LEDs = 0xFFFF;
