@@ -13,16 +13,18 @@ PortOut leds(PortC, LEDMASK);
 PortOut LEDs(PortB, LedMASK);
 int main()
 {
+    leds = 0;   //Binary 000
+    LEDs = 0;
     while (true) {
-        leds = 0;   //Binary 000
-        LEDs = 0;
-        wait_us(500000);
-        leds = 0xFF;   //Binary 11111111
-        LEDs = 0xFFFF;
-        wait_us(500000);    
+       
+        
+    leds = leds ^ LEDMASK, LEDs = LEDs ^ LedMASK;  // toggle only the masked pins on both ports
+    wait_us(500000);                   // 500 ms delay
+    
+    }    
 
-    }
 }
+
 
 
 
