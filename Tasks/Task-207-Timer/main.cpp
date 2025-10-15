@@ -17,7 +17,7 @@ int main()
 {
     //Time how long it takes to perform a printf
     tmr1.start();
-    printf("Hello World!\n");
+    printf("Hello World how are you\n");
     tmr1.stop();
 
     //Print out how long it took
@@ -29,15 +29,28 @@ int main()
     while (true) {
         //Wait for switch press
         while (SW_BLUE == 0);
+        
+
+        //Wait for 20ms
+        tmr1.reset();
+        while (tmr1.elapsed_time() < 20ms); //How about this for C++ magic :)
+
+
+        //***or we could simply put ***
+        wait_us(1000);
 
         //Turn on LED
         ledRed = 1;
 
+        while (SW_BLUE == 1);
+
         //Wait for 500ms
         tmr1.reset();
-        while (tmr1.elapsed_time() < 500ms); //How about this for C++ magic :)
+        while (tmr1.elapsed_time() < 20ms);
+        
 
-        wait_us(500000);
+        //***or we could simply put ***
+        //wait_us(1000);
 
         //Turn off LED
         ledRed = 0;
