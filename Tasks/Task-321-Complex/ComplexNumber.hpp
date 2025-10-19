@@ -39,7 +39,7 @@ public:
 
     //Destructor
     ~ComplexNumber() {
-        cout << "Bye'ee" << endl;
+        cout << "Lachoo" << endl;
     }
     
     //Read-only accessors
