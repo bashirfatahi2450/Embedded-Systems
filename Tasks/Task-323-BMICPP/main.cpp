@@ -25,7 +25,7 @@ int main(int argc, const char * argv[]) {
     cout << h2 << endl;
     
     //Try uncomenting this
-    //person._height = 0.0;
+    //
     return 0;
 }
 

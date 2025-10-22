@@ -11,7 +11,9 @@
 
 #include <stdio.h>
 #include <iostream>
+#include <stdexcept>
 using namespace std;
+
 
 class ComplexNumber {
 private:
@@ -71,7 +73,55 @@ public:
     ComplexNumber addedTo(const ComplexNumber& c) {
         return ComplexNumber(this->real+c.real, this->imag+c.imag);
     }
+
+    // --- Negate / Negated ---
+    void negate() { real = -real; imag = -imag; }                 // in-place
+    ComplexNumber negated() const { return { -real, -imag }; }    // returns copy
+
+
+
+
+    // --- Subtract / SubtractFrom ---
+    // "subtract" mirrors add: this -= c
+    void subtract(const ComplexNumber& c) { real -= c.real; imag -= c.imag; }            // in-place
+    // "subtractFrom" mirrors addedTo: returns this - c
+    ComplexNumber subtractFrom(const ComplexNumber& c) const { return { real - c.real, imag - c.imag }; }
     
+
+
+
+    // --- Multiply / MultiplyWith ---
+    // (a+bi)(c+di) = (ac - bd) + (ad + bc)i
+    void multiply(const ComplexNumber& c) {                                              // in-place
+        double r = real * c.real - imag * c.imag;
+        double i = real * c.imag + imag * c.real;
+        real = r; imag = i;
+    }
+    ComplexNumber multiplyWith(const ComplexNumber& c) const {                            // returns copy
+        return { real * c.real - imag * c.imag, real * c.imag + imag * c.real };
+    }
+
+
+bool divide(const ComplexNumber& c) {
+    const double denom = c.real * c.real + c.imag * c.imag; //  allowed inside class
+    if (denom == 0.0) return false;
+    const double r = (real * c.real + imag * c.imag) / denom;
+    const double i = (imag * c.real - real * c.imag) / denom;
+    real = r; imag = i;
+    return true;
+}
+
+bool divideWith(const ComplexNumber& c, ComplexNumber& out) const {
+    const double denom = c.real * c.real + c.imag * c.imag; // 
+    if (denom == 0.0) return false;
+    out = ComplexNumber(
+        (real * c.real + imag * c.imag) / denom,
+        (imag * c.real - real * c.imag) / denom
+    );
+    return true;
+}
+
+
     //Display
     void display() {
         cout << this->real << " + " << this->imag << "j" << endl;
