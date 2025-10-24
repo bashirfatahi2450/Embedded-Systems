@@ -91,3 +91,22 @@ TrafficLight::LIGHT_STATE TrafficLight::nextState()
     //Return the current state (for information)
     return State; 
 } 
+
+// ===== NEW PUBLIC API =====
+void TrafficLight::stop() {
+    State = STOP;
+    updateOutput();
+}
+
+void TrafficLight::setFlashSpeed(double hz) {
+    if (hz <= 0.0) hz = 1.0; // guard
+    _flashHz = hz;
+    // If currently flashing (i.e., WARNING), re-apply to update ticker
+    if (State == WARNING) {
+        flashYellow(true);
+    }
+}
+
+double TrafficLight::getFlashSpeed() const {
+    return _flashHz;
+}

@@ -20,9 +20,15 @@ class TrafficLight
     Ticker t;
     LIGHT_STATE State;
 
+    // --- Added: private members for flasher speed control ---
+    double _flashHz;   // flasher speed in Hz (on–off cycles/sec)
+
+
     void yellowFlashISR();
     void flashYellow(bool flash);
     void updateOutput();
+
+    
 
     public:
     //Constructor
@@ -33,6 +39,11 @@ class TrafficLight
 
     //Advance the traffic lights to the next state
     LIGHT_STATE nextState();
+    
+    // ===== NEW PUBLIC API =====
+    void   stop();                 // reset lights to red at any point
+    void   setFlashSpeed(double);  // set yellow flasher speed in Hz
+    double getFlashSpeed() const;  // read current flasher speed in Hz
 
 };
 
