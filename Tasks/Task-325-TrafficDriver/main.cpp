@@ -1,57 +1,56 @@
 #include "mbed.h"
 #include "TrafficLight.h"
-
-TrafficLight lights;
 DigitalIn sw(USER_BUTTON);
-
+TrafficLight set1(TrafficLight::SET1);
+TrafficLight set2(TrafficLight::SET2);
 TrafficLight::LIGHT_STATE s;
 
-int main()
-{
 
-    int presses = 0;
-    double flashHz = 2.0;   // default flasher speed
+
+
+
+
+
+
+
+// Create the three LEDs (open-drain, output mode, default OFF = 1)
+DigitalInOut red(TRAF_RED2_PIN,  PinDirection::PIN_OUTPUT, PinMode::OpenDrainNoPull, 1);
+DigitalInOut yel(TRAF_YEL2_PIN,  PinDirection::PIN_OUTPUT, PinMode::OpenDrainNoPull, 1);
+DigitalInOut grn(TRAF_GRN2_PIN,  PinDirection::PIN_OUTPUT, PinMode::OpenDrainNoPull, 1);
+
+int main() {
+   
+    printf("TrafficLight test (press button to advance)\n");
+
+    ThisThread::sleep_for(20ms);  // tiny settle (OE/EN, pull-ups)
+    set1.stop();
+    set2.stop();
+    set1.setFlashSpeed(2.0);
+    set2.setFlashSpeed(2.0);
+
+    int last = sw.read();
+    const int DEB = 30000; // 30 ms
+
     while (true) {
-
-        //Wait for switch press
-        while (sw==0);
-
-        //Update lights
-        presses++;
-        s = lights.nextState();
-
-        // If we just entered WARNING, apply/print current flash speed
-        if (s == TrafficLight::WARNING) {
-            lights.setFlashSpeed(flashHz);
-            printf("Entered WARNING: flash @ %.1f Hz (get=%.1f)\n",
-                   flashHz, lights.getFlashSpeed());
+        int cur = sw.read();
+        if (last == 1 && cur == 0) {           // falling edge = press
+            wait_us(DEB);
+            if (sw.read() == 0) {
+                set1.nextState();
+                set2.nextState();
+                while (sw.read() == 0) {}
+                wait_us(DEB);
+            }
         }
-
-        // --- Test new APIs on specific presses ---
-        if (presses == 5) {
-            flashHz = 5.0;
-            lights.setFlashSpeed(flashHz);
-            printf("[TEST] setFlashSpeed(%.1f) -> getFlashSpeed()=%.1f\n",
-                   flashHz, lights.getFlashSpeed());
-        } else if (presses == 7) {
-            printf("[TEST] stop() called -> should be solid RED now\n");
-            lights.stop();
-        } else if (presses == 9) {
-            flashHz = 1.0;
-            lights.setFlashSpeed(flashHz);
-            printf("[TEST] setFlashSpeed(%.1f) -> getFlashSpeed()=%.1f\n",
-                   flashHz, lights.getFlashSpeed());
-        }
-
-        //Debounce switch
-        wait_us(300000);
-
-        //Wait for switch release
-        while (sw==1);
-
-        //Switch debounce
-        wait_us(300000);
-        
+        last = cur;
+        wait_us(2000);
     }
 }
+
+
+
+
+   
+    
+
 
