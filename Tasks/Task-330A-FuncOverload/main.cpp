@@ -21,7 +21,7 @@ public:
     }
 
     //Convenience constructor
-    DoubleNumber() : DoubleNumber(0.0) { }
+    DoubleNumber() : DoubleNumber(0.0) {}
 
     //Magnitude
     double magnitude() {
@@ -31,12 +31,15 @@ public:
     //Three overloaded functions
     void setValue(double u) {
         _real = u;
+        cout << "double" << endl;
     }
     void setValue(int u) {
         _real = (double)u;
+        cout << "int" << endl;
     }
     void setValue(string strVal) {
         _real = stod(strVal);
+        cout << "string" << endl;
     }
 
     double getValue() {
@@ -55,10 +58,12 @@ int main()
     DoubleNumber n0(1.0);
     DoubleNumber n1;
     DoubleNumber n2;
+    DoubleNumber n3;
 
     //setValue function overloading  
     n1.setValue(10);
     n2.setValue("-3.0");
+    n3.setValue(5.0);
 
     cout << n0.getValue() + n1.getValue() + n2.getValue() << endl;
 
