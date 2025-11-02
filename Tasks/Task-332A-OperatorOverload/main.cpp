@@ -84,9 +84,9 @@ public:
     }
     bool operator==(DoubleNumber& u)
     {
-        // Return a true if u is equal to `this`
-        // ** TO BE DONE BY THE STUDENT **
-        return false;
+        double a = this->getValue();
+        double b = u.getValue();
+        return (a == b);
     }
 
     operator double() {
@@ -112,6 +112,18 @@ int main()
 
     DoubleNumber sum = (n0 + n1 + n2 + n3);
     cout << sum << endl;
+
+    DoubleNumber x;
+    DoubleNumber y;
+
+    x.setValue(5.5);
+    y.setValue(4.5);
+
+    if (x == y) {
+        cout << "x and y are equal!" << endl;
+    } else {
+        cout << "x and y are not equal!" << endl;
+    }
 
     while (true) {
 
