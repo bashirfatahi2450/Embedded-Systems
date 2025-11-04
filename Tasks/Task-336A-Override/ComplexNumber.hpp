@@ -63,7 +63,11 @@ public:
     ComplexNumber operator+(ComplexNumber& u) {
         ComplexNumber result;
 
-        //TO BE DONE
+        // Add real parts using the inherited _real
+        result._real = this->_real + u._real;
+
+        // Add imaginary parts
+        result._imag = this->_imag + u._imag;
 
         return result;
     }
