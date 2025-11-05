@@ -1,7 +1,7 @@
 #include "uop_msb.h"
 #include <chrono>
 #include <ratio>
-
+#include <iostream>
 using namespace uop_msb;
 using namespace chrono;
 
@@ -18,6 +18,7 @@ class Flashy : public DigitalOut {
     virtual void timerISR()  {
         //Call the baseclass version to toggle the GPIO
         DigitalOut::write(1-this->read());
+        cout << "[Flashy runs\n";
         
     }
 
@@ -101,6 +102,7 @@ class Flickery : public Flashy {
         int r = rand();
         if ((r % 4) == 0) {
             DigitalOut::write(1-this->read());
+            cout << "[Flickery runs\n";
         }        
     } 
 
@@ -116,7 +118,7 @@ class Flickery : public Flashy {
 
 DigitalIn blueButton(USER_BUTTON);
 
-//#define EXP1
+#define EXP1
 int main()
 {
     #ifndef EXP1
